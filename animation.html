@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Animation</title>
+	<link rel="stylesheet" href="animation.css">
+</head>
+<body>
+	<div class="box">
+		<img src="guy.jpg">
+		<img src="profile3.png">
+	</div>	
+	<div class="container">
+		<p> I AM <span class="typed-text"></span><span class="cursor typing">&nbsp;</span></p>
+	</div>
+	<div class="profile">
+		<div class="info">
+			<h2>Jane Doe</h2>
+			<p>CEO Pathfind Ltd</p>
+		</div>
+	</div>
+	<button class="btn"><span>Hover Me</span></button>
+	
+	
+
+
+
+
+    <script src="jquery-3.5.1.min.js"></script>
+    <script src="popper.min.js"></script> 
+    <script>
+    	const typingSpan = document.querySelector(".typed-text");
+
+    	const textArray = ["CHIAMAKA", "AMAZING", "WONDERFUL", "FUN!"];
+    	const typingDelay = 200;
+    	const erasingDelay = 100;
+    	const newTextDelay = 2000;
+    	let textArrayIndex = 0;
+    	let charIndex = 0;
+
+    	function type(){
+    		if (charIndex < textArray[textArrayIndex].length) {
+    			typingSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+    			charIndex++ ;
+    			setTimeout(type, typingDelay);
+    		} else{
+    			setTimeout(erase, newTextDelay);
+    		}
+    	}
+    	function erase(){
+    		if (charIndex > 0) {
+    			typingSpan.textContent = textArray[textArrayIndex].slice(0 , charIndex-1);
+    			charIndex-- ;
+    			setTimeout(erase, erasingDelay);
+    		}else{
+    			textArrayIndex++;
+    			if(textArrayIndex >= textArray.length) textArrayIndex = 0;
+    			setTimeout(type, typingDelay + 1000);
+    		}
+    	}
+
+    	document.addEventListener("DOMContentLoaded", function(){
+    		setTimeout(type, newTextDelay + 200);
+    	});
+    </script>
+</body>
+</html>
